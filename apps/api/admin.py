@@ -1,3 +1,7 @@
 from django.contrib import admin
+from apps.api.models import Device, Sensor, Read
 
-# Register your models here.
+admin.site.register(Device)
+admin.site.register(Sensor)
+admin.site.register(Read)
+
