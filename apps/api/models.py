@@ -1,14 +1,23 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+from apps.api.utils import get_random_string
+
 DATA_TYPE_CHOICES = (
     ('i', 'int'),
     ('f', 'float'),
     ('s', 'string')
 )
+DATA_TYPE_CAST = {
+    'i': int,
+    'f': float,
+    's': str,
+}
+
 
 
 class Device(models.Model):
+    id = models.CharField(max_length=4, primary_key=True, default=get_random_string)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=30)
     area = models.CharField(max_length=30)
@@ -21,6 +30,7 @@ class Device(models.Model):
 
 
 class Sensor(models.Model):
+    id = models.CharField(max_length=4, primary_key=True, default=get_random_string)
     name = models.CharField(max_length=30)
     device = models.ForeignKey(Device, on_delete=models.CASCADE)
     data_type = models.CharField(max_length=7, choices=DATA_TYPE_CHOICES, blank=False, null=False)
@@ -38,4 +48,10 @@ class Read(models.Model):
     gateway_id = models.CharField(max_length=30)
     rssi = models.FloatField()
     snr = models.FloatField()
-    value = models.CharField(max_length=30)
+    raw_value = models.CharField(max_length=30)
+
+    @property
+    def value(self):
+        cast = DATA_TYPE_CAST[self.sensor.data_type]
+        return cast(self.raw_value)
+

@@ -8,8 +8,7 @@ from apps.api import views
 
 
 router = routers.DefaultRouter()
-router.register(r'me', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
+router.register(r'me', views.MyUserDetailView, basename='MyUser')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
@@ -20,5 +19,12 @@ urlpatterns = [
     path('refresh-token/', refresh_jwt_token),
     path('admin/', admin.site.urls),
 
+    path('user/', views.CreateUserView().as_view()),
+    # path('user/<int:pk>/', views.UpdateUserView().as_view()),
 
+    path('device/', views.DeviceListCreateView().as_view()),
+    path('device/<int:device>/', views.DeviceRetrieveUpdateView().as_view()),
+
+    path('device/<int:device>/sensor/', views.SensorListCreateView().as_view()),
+    path('device/<int:device>/sensor/<int:sensor>/', views.SensorRetrieveUpdateView.as_view())
 ]
