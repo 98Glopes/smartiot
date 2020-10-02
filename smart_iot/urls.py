@@ -23,8 +23,8 @@ urlpatterns = [
     # path('user/<int:pk>/', views.UpdateUserView().as_view()),
 
     path('device/', views.DeviceListCreateView().as_view()),
-    path('device/<int:device>/', views.DeviceRetrieveUpdateView().as_view()),
+    path('device/<str:device>/', views.DeviceRetrieveUpdateView().as_view()),
 
-    path('device/<int:device>/sensor/', views.SensorListCreateView().as_view()),
-    path('device/<int:device>/sensor/<int:sensor>/', views.SensorRetrieveUpdateView.as_view())
+    path('device/<str:device>/sensor/', views.SensorListCreateView().as_view()),
+    path('device/<str:device>/sensor/<str:sensor>/', views.SensorRetrieveUpdateView.as_view())
 ]
