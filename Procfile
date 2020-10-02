@@ -1,1 +1,1 @@
-web: guinicorn smart_iot.wsgi
+web: gunicorn smart_iot.wsgi
