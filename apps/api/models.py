@@ -15,7 +15,6 @@ DATA_TYPE_CAST = {
 }
 
 
-
 class Device(models.Model):
     id = models.CharField(max_length=4, primary_key=True, default=get_random_string)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -55,3 +54,5 @@ class Read(models.Model):
         cast = DATA_TYPE_CAST[self.sensor.data_type]
         return cast(self.raw_value)
 
+    def __str__(self):
+        return F"{self.sensor.device.id}.{self.sensor.id}.{self.timestamp}"
