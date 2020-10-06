@@ -1,1 +1,1 @@
-web: gunicorn smart_iot.wsgi
+web: python main.py
