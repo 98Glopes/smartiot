@@ -1,12 +1,9 @@
-from django.contrib.auth.models import Group, User
+from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
-from rest_framework import viewsets
-from rest_framework import permissions
 from rest_framework import generics
-from rest_framework.serializers import CharField
-from rest_framework.validators import UniqueValidator
+from rest_framework import permissions
+from rest_framework import viewsets
 
-from apps.api import serializers
 from apps.api.models import Device, Sensor
 from apps.api.serializers import UserDetailSerializer, UserSerializer, DeviceCreateSerializer, \
     DeviceSerializer, SensorSerializer, SensorCreateSerializer
