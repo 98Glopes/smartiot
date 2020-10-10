@@ -26,5 +26,7 @@ urlpatterns = [
     path('device/<str:device>/', views.DeviceRetrieveUpdateView().as_view()),
 
     path('device/<str:device>/sensor/', views.SensorListCreateView().as_view()),
-    path('device/<str:device>/sensor/<str:sensor>/', views.SensorRetrieveUpdateView.as_view())
+    path('device/<str:device>/sensor/<str:sensor>/', views.SensorRetrieveUpdateView.as_view()),
+
+    path('device/<str:device>/sensor/<str:sensor>/read', views.ReadListView.as_view())
 ]
