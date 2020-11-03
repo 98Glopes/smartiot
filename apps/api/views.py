@@ -4,9 +4,24 @@ from rest_framework import generics
 from rest_framework import permissions
 from rest_framework import viewsets
 
-from apps.api.models import Device, Sensor
+from apps.api.filters import ReadFilter
+from apps.api.models import Device, Sensor, Read
 from apps.api.serializers import UserDetailSerializer, UserSerializer, DeviceCreateSerializer, \
-    DeviceSerializer, SensorSerializer, SensorCreateSerializer
+    DeviceSerializer, SensorSerializer, SensorCreateSerializer, ListReadSerializer
+
+
+class UsersQuerySet:
+    @property
+    def device(self):
+        qs = Device.objects.all()
+        qs = qs.filter(user=self.request.user)
+        return get_object_or_404(qs, id=self.kwargs['device'])
+
+    @property
+    def sensor(self):
+        qs = Sensor.objects.all()
+        qs = qs.filter(device=self.device)
+        return get_object_or_404(qs, id=self.kwargs['sensor'])
 
 
 class MyUserDetailView(viewsets.ModelViewSet):
@@ -138,3 +153,15 @@ class SensorRetrieveUpdateView(generics.RetrieveUpdateDestroyAPIView):
         qs = Device.objects.all(). \
             filter(user=self.request.user)
         return get_object_or_404(qs, id=self.kwargs['device'])
+
+
+class ReadListView(generics.ListAPIView, UsersQuerySet):
+    serializer_class = ListReadSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    filterset_class = ReadFilter
+
+    def get_queryset(self):
+        qs = Read.objects.all().filter(sensor=self.sensor).order_by('-timestamp')
+        return qs
+
+
