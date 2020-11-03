@@ -22,7 +22,7 @@ BASE_DIR = str(Path(__file__).resolve().parent.parent)
 SECRET_KEY = 'o##h@s4u&nnq$s82@qr%t(f-wya8zs*wx%99lgz9^chdjp^7qk'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -131,7 +131,7 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 }
 #
-# import django_heroku
-# django_heroku.settings(locals())
+import django_heroku
+django_heroku.settings(locals())
 
 DJANGO_NAMEKO_STANDALONE_APPS = ("api",)
