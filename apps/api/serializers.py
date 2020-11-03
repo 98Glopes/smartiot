@@ -1,10 +1,11 @@
 import datetime
+from abc import ABC
 
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 
-from apps.api.models import Device, Sensor
+from apps.api.models import Device, Sensor, Read
 
 
 class UserDetailSerializer(serializers.ModelSerializer):
@@ -92,3 +93,9 @@ class FilterSerializer(serializers.Serializer):
 
     def create(self, validated_Data):
         return validated_Data
+
+
+class ListReadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Read
+        fields = '__all__'
