@@ -43,7 +43,7 @@ class DeviceSerializer(serializers.ModelSerializer):
 class DeviceCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Device
-        fields = ['name', 'area']
+        fields = ['id', 'name', 'area']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -71,7 +71,7 @@ class SensorSerializer(serializers.ModelSerializer):
 class SensorCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sensor
-        fields = ['data_type', 'name']
+        fields = ['id', 'data_type', 'name']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
