@@ -21,6 +21,9 @@ class Device(models.Model):
     name = models.CharField(max_length=30)
     area = models.CharField(max_length=30)
 
+    mqtt_user = models.CharField(max_length=6)
+    mqtt_passwd = models.CharField(max_length=6)
+
     def __repr__(self):
         return self.name
 
@@ -44,9 +47,6 @@ class Sensor(models.Model):
 class Read(models.Model):
     sensor = models.ForeignKey(Sensor, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(editable=True, null=False, blank=False)
-    gateway_id = models.CharField(max_length=30)
-    rssi = models.FloatField()
-    snr = models.FloatField()
     raw_value = models.CharField(max_length=30)
 
     @property
