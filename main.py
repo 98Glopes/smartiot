@@ -5,7 +5,7 @@ from micro_framework.routes import Route
 from micro_framework.runner import Runner
 
 config = {
-    'AMQP_URI': 'amqps://gquorlsc:UE-n6Zn0AA3yddcyY_nqiFG0nUOML7k5@grouse.rmq.cloudamqp.com/gquorlsc',
+    'AMQP_URI': 'amqp://guest:guest@127.0.0.1:5672/',
     'MAX_WORKERS': 3,
     'SERVICE_NAME': 'smartiot_service',
     'MAX_TASKS_PER_CHILD': 2, # currently for process WORKER_MODE only

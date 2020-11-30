@@ -37,13 +37,14 @@ class UserSerializer(serializers.ModelSerializer):
 class DeviceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Device
-        fields = ['id', 'user', 'name', 'area']
+        fields = '__all__'
 
 
 class DeviceCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Device
-        fields = ['id', 'name', 'area']
+        fields = '__all__'
+        read_only = ['user', 'mqtt_user', 'mqtt_passwd']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

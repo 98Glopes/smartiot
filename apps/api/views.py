@@ -8,6 +8,7 @@ from apps.api.filters import ReadFilter
 from apps.api.models import Device, Sensor, Read
 from apps.api.serializers import UserDetailSerializer, UserSerializer, DeviceCreateSerializer, \
     DeviceSerializer, SensorSerializer, SensorCreateSerializer, ListReadSerializer
+from apps.api.utils import get_random_string
 
 
 class UsersQuerySet:
@@ -163,5 +164,9 @@ class ReadListView(generics.ListAPIView, UsersQuerySet):
     def get_queryset(self):
         qs = Read.objects.all().filter(sensor=self.sensor).order_by('-timestamp')
         return qs
+
+
+from rabbitmqsdk.client import RabbitClient
+
 
 
